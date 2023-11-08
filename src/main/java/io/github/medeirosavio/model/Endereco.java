@@ -1,7 +1,11 @@
 package io.github.medeirosavio.model;
+import jakarta.persistence.*;
 
+@Entity
 public class Endereco {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long endereco_id;
     private String rua;
     private String numero;
     private String complemento;
@@ -9,7 +13,12 @@ public class Endereco {
     private String cidade;
     private String estado;
     private Long cep;
+    @OneToOne(mappedBy = "endereco")
+    private Paciente paciente;
 
+    public Endereco() {
+
+    }
     public Endereco(String rua, String numero, String complemento, String bairro, String cidade, String estado, Long cep) {
         this.rua = rua;
         this.numero = numero;
@@ -19,4 +28,6 @@ public class Endereco {
         this.estado = estado;
         this.cep = cep;
     }
+
+
 }

@@ -4,6 +4,5 @@ public interface Empresa {
 
     Endereco getEndereco();
 
-    NomeFantasia getNomeFantasia();
 
 }
