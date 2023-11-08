@@ -15,6 +15,14 @@ public class Endereco {
     private Long cep;
     @OneToOne(mappedBy = "endereco")
     private Paciente paciente;
+    @OneToOne(mappedBy = "endereco")
+    private Funcionario funcionario;
+    @OneToOne(mappedBy = "endereco")
+    private Hospital hospital;
+    @OneToOne(mappedBy = "endereco")
+    private Laboratorio laboratorio;
+    @OneToOne(mappedBy = "endereco")
+    private UPA upa;
 
     public Endereco() {
 
