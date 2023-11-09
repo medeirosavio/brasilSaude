@@ -26,11 +26,10 @@ public class Funcionario extends Pessoa {
     public Funcionario(){super();}
 
     public Funcionario(Long cpf, String nome, LocalDate dataNascimento,String email,
-                       String telefone ,String sexo, Long matricula, String cargo,
+                       String telefone ,String sexo, String cargo,
                        String departamento, String status, LocalDate dataAdmissao,
                        LocalTime horario, BigDecimal salario){
         super(cpf,nome,dataNascimento,email,telefone,sexo);
-        this.matricula = matricula;
         this.cargo = cargo;
         this.departamento = departamento;
         this.status = status;

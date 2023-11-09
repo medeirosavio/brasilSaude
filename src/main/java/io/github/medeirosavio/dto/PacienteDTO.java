@@ -1,19 +1,19 @@
 package io.github.medeirosavio.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import org.antlr.v4.runtime.misc.NotNull;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import java.time.LocalDate;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class PacienteDTO {
 
-    @NotNull
+    @javax.validation.constraints.NotNull
     private Long cpf;
     @NotBlank
     private String nome;
-    @NotNull
+    @javax.validation.constraints.NotNull
     @Past
     private LocalDate dataNascimento;
     @NotBlank
@@ -22,7 +22,7 @@ public class PacienteDTO {
     private String telefone;
     @NotBlank
     private String sexo;
-    @NotNull
+    @javax.validation.constraints.NotNull
     private LocalDate dataInternacao;
     @NotNull
     @Past
