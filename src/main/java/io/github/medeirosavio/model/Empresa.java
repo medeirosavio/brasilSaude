@@ -4,14 +4,14 @@ import java.time.LocalDate;
 
 public abstract class Empresa {
 
-    private Long cnpj;
-    private String nome;
-    private String telefone;
-    private String email;
-    private String site;
-    private LocalDate dataFundacao;
-    private String descricao;
-    private String status;
+    protected Long cnpj;
+    protected String nome;
+    protected String telefone;
+    protected String email;
+    protected String site;
+    protected LocalDate dataFundacao;
+    protected String descricao;
+    protected String status;
 
     public Empresa(){
 
