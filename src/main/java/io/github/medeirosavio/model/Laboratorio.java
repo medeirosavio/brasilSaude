@@ -26,5 +26,47 @@ public class Laboratorio extends Empresa{
         super(cnpj,nome,telefone,email,site,dataFundacao,descricao,status);
     }
 
+    @Override
+    public void setCnpj(Long cnpj) {
+        super.setCnpj(cnpj);
+    }
 
+    @Override
+    public void setNome(String nome) {
+        super.setNome(nome);
+    }
+
+    @Override
+    public void setTelefone(String telefone) {
+        super.setTelefone(telefone);
+    }
+
+    @Override
+    public void setEmail(String email) {
+        super.setEmail(email);
+    }
+
+    @Override
+    public void setSite(String site) {
+        super.setSite(site);
+    }
+
+    @Override
+    public void setDataFundacao(LocalDate dataFundacao) {
+        super.setDataFundacao(dataFundacao);
+    }
+
+    @Override
+    public void setDescricao(String descricao) {
+        super.setDescricao(descricao);
+    }
+
+    @Override
+    public void setStatus(String status) {
+        super.setStatus(status);
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
 }

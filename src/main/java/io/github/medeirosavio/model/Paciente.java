@@ -32,5 +32,49 @@ public class Paciente extends Pessoa{
         this.dataInternacao = dataInternacao;
     }
 
+    public Paciente(Long cpf, String nome, LocalDate dataNascimento, String email, String telefone, String sexo) {
+        super(cpf, nome, dataNascimento, email, telefone, sexo);
+    }
 
+    @Override
+    public void setCpf(Long cpf) {
+        super.setCpf(cpf);
+    }
+
+    @Override
+    public void setNome(String nome) {
+        super.setNome(nome);
+    }
+
+    @Override
+    public void setDataNascimento(LocalDate dataNascimento) {
+        super.setDataNascimento(dataNascimento);
+    }
+
+    @Override
+    public void setEmail(String email) {
+        super.setEmail(email);
+    }
+
+    @Override
+    public void setTelefone(String telefone) {
+        super.setTelefone(telefone);
+    }
+
+    @Override
+    public void setSexo(String sexo) {
+        super.setSexo(sexo);
+    }
+
+    public void setDataInternacao(LocalDate dataInternacao) {
+        this.dataInternacao = dataInternacao;
+    }
+
+    public void setDataInicioSintomas(LocalDate dataInicioSintomas) {
+        this.dataInicioSintomas = dataInicioSintomas;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
 }

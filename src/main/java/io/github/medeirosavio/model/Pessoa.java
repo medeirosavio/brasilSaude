@@ -22,5 +22,27 @@ public abstract class Pessoa {
         this.sexo = sexo;
     }
 
+    public void setCpf(Long cpf) {
+        this.cpf = cpf;
+    }
 
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setDataNascimento(LocalDate dataNascimento) {
+        this.dataNascimento = dataNascimento;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
+    }
 }

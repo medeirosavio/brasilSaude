@@ -31,5 +31,35 @@ public abstract class Empresa {
 
     }
 
+    public void setCnpj(Long cnpj) {
+        this.cnpj = cnpj;
+    }
 
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setSite(String site) {
+        this.site = site;
+    }
+
+    public void setDataFundacao(LocalDate dataFundacao) {
+        this.dataFundacao = dataFundacao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 }

@@ -41,6 +41,65 @@ public class Funcionario extends Pessoa {
 
     }
 
+    public Funcionario(Long cpf, String nome, LocalDate dataNascimento, String email, String telefone, String sexo) {
+        super(cpf, nome, dataNascimento, email, telefone, sexo);
+    }
 
+    @Override
+    public void setCpf(Long cpf) {
+        super.setCpf(cpf);
+    }
 
+    @Override
+    public void setNome(String nome) {
+        super.setNome(nome);
+    }
+
+    @Override
+    public void setDataNascimento(LocalDate dataNascimento) {
+        super.setDataNascimento(dataNascimento);
+    }
+
+    @Override
+    public void setEmail(String email) {
+        super.setEmail(email);
+    }
+
+    @Override
+    public void setTelefone(String telefone) {
+        super.setTelefone(telefone);
+    }
+
+    @Override
+    public void setSexo(String sexo) {
+        super.setSexo(sexo);
+    }
+
+    public void setCargo(String cargo) {
+        this.cargo = cargo;
+    }
+
+    public void setDepartamento(String departamento) {
+        this.departamento = departamento;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public void setDataAdmissao(LocalDate dataAdmissao) {
+        this.dataAdmissao = dataAdmissao;
+    }
+
+    public void setHorario(LocalTime horario) {
+        this.horario = horario;
+    }
+
+    public void setSalario(BigDecimal salario) {
+        this.salario = salario;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
 }
