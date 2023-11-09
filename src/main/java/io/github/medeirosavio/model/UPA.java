@@ -1,5 +1,6 @@
 package io.github.medeirosavio.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -12,6 +13,7 @@ public class UPA extends Empresa{
 
     @OneToOne
     @JoinColumn(name = "endereco_id")
+    @JsonIgnore
     private Endereco endereco;
 
     public UPA(){super();}

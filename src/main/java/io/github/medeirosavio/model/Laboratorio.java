@@ -1,5 +1,6 @@
 package io.github.medeirosavio.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import javax.swing.border.LineBorder;
@@ -14,6 +15,7 @@ public class Laboratorio extends Empresa{
 
     @OneToOne
     @JoinColumn(name = "endereco_id")
+    @JsonIgnore
     private Endereco endereco;
 
     public Laboratorio(){super();}

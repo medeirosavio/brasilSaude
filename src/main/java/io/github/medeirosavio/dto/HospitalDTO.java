@@ -23,7 +23,10 @@ public class HospitalDTO {
     @Past
     private LocalDate dataFundacao;
     private String descricao;
+    @NotBlank
     private String status;
+
+    private EnderecoDTO endereco;
 
     public HospitalDTO(){
 
@@ -31,7 +34,7 @@ public class HospitalDTO {
 
     public HospitalDTO(Long cnpj, String nome, String telefone, String email,
                        String site, LocalDate dataFundacao, String descricao,
-                       String status){
+                       String status, EnderecoDTO endereco){
         this.cnpj = cnpj;
         this.nome = nome;
         this.telefone = telefone;
@@ -40,6 +43,7 @@ public class HospitalDTO {
         this.dataFundacao = dataFundacao;
         this.descricao = descricao;
         this.status = status;
+        this.endereco = endereco;
     }
 
     public Long getCnpj() {
@@ -100,5 +104,13 @@ public class HospitalDTO {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public EnderecoDTO getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(EnderecoDTO endereco) {
+        this.endereco = endereco;
     }
 }

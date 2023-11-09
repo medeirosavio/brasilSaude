@@ -1,5 +1,6 @@
 package io.github.medeirosavio.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.springframework.cglib.core.Local;
 
@@ -16,6 +17,7 @@ public class Paciente extends Pessoa{
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "endereco_id")
+    @JsonIgnore
     private Endereco endereco;
 
     public Paciente() {

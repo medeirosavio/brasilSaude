@@ -40,6 +40,8 @@ public class FuncionarioDTO {
     @DecimalMin(value = "1320.0",inclusive = false,message = "Valor do salário mínimo R$1320,00")
     private BigDecimal salario;
 
+    private EnderecoDTO endereco;
+
     public FuncionarioDTO(){
 
     }
@@ -48,7 +50,8 @@ public class FuncionarioDTO {
                           String email, String telefone,String sexo,
                           String cargo, String departamento,
                           String status, LocalDate dataAdmissao,
-                          LocalTime horario, BigDecimal salario){
+                          LocalTime horario, BigDecimal salario,
+                          EnderecoDTO endereco){
         this.cpf = cpf;
         this.nome = nome;
         this.dataNascimento = dataNascimento;
@@ -61,6 +64,7 @@ public class FuncionarioDTO {
         this.dataAdmissao = dataAdmissao;
         this.horario = horario;
         this.salario = salario;
+        this.endereco = endereco;
     }
 
     public Long getCpf() {
@@ -153,5 +157,13 @@ public class FuncionarioDTO {
 
     public void setSalario(BigDecimal salario) {
         this.salario = salario;
+    }
+
+    public EnderecoDTO getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(EnderecoDTO endereco) {
+        this.endereco = endereco;
     }
 }

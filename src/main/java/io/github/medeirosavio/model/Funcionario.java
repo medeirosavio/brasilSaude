@@ -1,5 +1,6 @@
 package io.github.medeirosavio.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
@@ -21,6 +22,7 @@ public class Funcionario extends Pessoa {
 
     @OneToOne
     @JoinColumn(name = "endereco_id")
+    @JsonIgnore
     private Endereco endereco;
 
     public Funcionario(){super();}

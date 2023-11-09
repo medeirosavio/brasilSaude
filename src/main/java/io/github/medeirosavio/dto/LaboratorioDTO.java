@@ -24,6 +24,7 @@ public class LaboratorioDTO {
     private LocalDate dataFundacao;
     private String descricao;
     private String status;
+    private EnderecoDTO endereco;
 
     public LaboratorioDTO(){
 
@@ -31,7 +32,7 @@ public class LaboratorioDTO {
 
     public LaboratorioDTO(Long cnpj, String nome, String telefone, String email,
                        String site, LocalDate dataFundacao, String descricao,
-                       String status){
+                       String status,EnderecoDTO endereco){
         this.cnpj = cnpj;
         this.nome = nome;
         this.telefone = telefone;
@@ -40,6 +41,7 @@ public class LaboratorioDTO {
         this.dataFundacao = dataFundacao;
         this.descricao = descricao;
         this.status = status;
+        this.endereco = endereco;
     }
 
     public Long getCnpj() {
@@ -100,5 +102,13 @@ public class LaboratorioDTO {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public EnderecoDTO getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(EnderecoDTO endereco) {
+        this.endereco = endereco;
     }
 }

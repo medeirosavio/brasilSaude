@@ -28,13 +28,16 @@ public class PacienteDTO {
     @Past
     private LocalDate dataInicioSintomas;
 
+    private EnderecoDTO endereco;
+
     public PacienteDTO(){
 
     }
 
     public PacienteDTO(Long cpf, String nome, LocalDate dataNascimento,
                        String email, String telefone,String sexo,
-                       LocalDate dataInicioSintomas, LocalDate dataInternacao){
+                       LocalDate dataInicioSintomas, LocalDate dataInternacao,
+                       EnderecoDTO endereco){
         this.cpf = cpf;
         this.nome = nome;
         this.dataNascimento = dataNascimento;
@@ -43,6 +46,7 @@ public class PacienteDTO {
         this.sexo = sexo;
         this.dataInicioSintomas = dataInicioSintomas;
         this.dataInternacao = dataInternacao;
+        this.endereco = endereco;
     }
 
     public Long getCpf() {
@@ -103,5 +107,13 @@ public class PacienteDTO {
 
     public void setDataInicioSintomas(LocalDate dataInicioSintomas) {
         this.dataInicioSintomas = dataInicioSintomas;
+    }
+
+    public EnderecoDTO getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(EnderecoDTO endereco) {
+        this.endereco = endereco;
     }
 }
