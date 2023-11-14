@@ -1,9 +1,8 @@
 package io.github.medeirosavio.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
-import org.springframework.cglib.core.Local;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity

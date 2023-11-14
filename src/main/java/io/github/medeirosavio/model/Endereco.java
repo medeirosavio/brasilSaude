@@ -1,5 +1,5 @@
 package io.github.medeirosavio.model;
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 @Entity
 public class Endereco {
