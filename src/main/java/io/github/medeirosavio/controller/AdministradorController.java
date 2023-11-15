@@ -13,10 +13,7 @@ import io.github.medeirosavio.service.UPAService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/administrador")
@@ -70,6 +67,32 @@ public class AdministradorController {
             return new ResponseEntity<>("Erro de integridade de dados ao cadastrar o laboratorio", HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
             return new ResponseEntity<>("Erro interno ao processar a solicitação", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PostMapping("/cadastrar/funcionario")
+    public ResponseEntity<String> cadastrarFuncionario(@RequestBody FuncionarioDTO funcionarioDTO) {
+        try {
+            funcionarioService.cadastrarFuncionario(funcionarioDTO);
+            return new ResponseEntity<>("Funcionario cadastrado com sucesso", HttpStatus.CREATED);
+        } catch (NotFoundException e) {
+            return new ResponseEntity<>("Funcionario não encontrado", HttpStatus.NOT_FOUND);
+        } catch (DataIntegrityViolationException e) {
+            return new ResponseEntity<>("Erro de integridade de dados ao cadastrar o funcionario", HttpStatus.BAD_REQUEST);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Erro interno ao processar a solicitação", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @DeleteMapping("/funcionario/{id}")
+    public ResponseEntity<String> removerFuncionario(@PathVariable Long id) {
+        try {
+            funcionarioService.removerFuncionario(id);
+            return ResponseEntity.ok("Funcionário removido com sucesso.");
+        } catch (NotFoundException e) {
+            return ResponseEntity.status(404).body("Funcionário não encontrado.");
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Erro ao remover o funcionário.");
         }
     }
 

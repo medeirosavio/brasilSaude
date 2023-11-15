@@ -8,7 +8,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.LocalTime;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class FuncionarioDTO {
@@ -35,8 +34,6 @@ public class FuncionarioDTO {
     @javax.validation.constraints.NotNull
     private LocalDate dataAdmissao;
     @NotNull
-    private LocalTime horario;
-    @NotNull
     @DecimalMin(value = "1320.0",inclusive = false,message = "Valor do salário mínimo R$1320,00")
     private BigDecimal salario;
 
@@ -50,8 +47,7 @@ public class FuncionarioDTO {
                           String email, String telefone,String sexo,
                           String cargo, String departamento,
                           String status, LocalDate dataAdmissao,
-                          LocalTime horario, BigDecimal salario,
-                          EnderecoDTO endereco){
+                          BigDecimal salario, EnderecoDTO endereco){
         this.cpf = cpf;
         this.nome = nome;
         this.dataNascimento = dataNascimento;
@@ -62,7 +58,6 @@ public class FuncionarioDTO {
         this.departamento = departamento;
         this.status = status;
         this.dataAdmissao = dataAdmissao;
-        this.horario = horario;
         this.salario = salario;
         this.endereco = endereco;
     }
@@ -141,14 +136,6 @@ public class FuncionarioDTO {
 
     public void setDataAdmissao(LocalDate dataAdmissao) {
         this.dataAdmissao = dataAdmissao;
-    }
-
-    public LocalTime getHorario() {
-        return horario;
-    }
-
-    public void setHorario(LocalTime horario) {
-        this.horario = horario;
     }
 
     public BigDecimal getSalario() {

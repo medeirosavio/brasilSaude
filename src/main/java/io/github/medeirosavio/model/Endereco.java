@@ -1,4 +1,6 @@
 package io.github.medeirosavio.model;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -15,7 +17,8 @@ public class Endereco {
     private Long cep;
     @OneToOne(mappedBy = "endereco")
     private Paciente paciente;
-    @OneToOne(mappedBy = "endereco")
+    @OneToOne
+    @JoinColumn(name = "funcionario_id")
     private Funcionario funcionario;
     @OneToOne(mappedBy = "endereco")
     private Hospital hospital;
@@ -70,4 +73,15 @@ public class Endereco {
         this.cep = cep;
     }
 
+    public Funcionario getFuncionario() {
+        return funcionario;
+    }
+
+    public void setFuncionario(Funcionario funcionario) {
+        this.funcionario = funcionario;
+    }
+
+    public Long getEndereco_id() {
+        return endereco_id;
+    }
 }

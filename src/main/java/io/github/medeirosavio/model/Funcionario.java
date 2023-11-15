@@ -16,12 +16,9 @@ public class Funcionario extends Pessoa {
     private String departamento;
     private String status;
     private LocalDate dataAdmissao;
-    private LocalTime horario;
     private BigDecimal salario;
 
-    @OneToOne
-    @JoinColumn(name = "endereco_id")
-    @JsonIgnore
+    @OneToOne(mappedBy = "funcionario", cascade = CascadeType.ALL, orphanRemoval = true)
     private Endereco endereco;
 
     public Funcionario(){super();}
@@ -29,13 +26,12 @@ public class Funcionario extends Pessoa {
     public Funcionario(Long cpf, String nome, LocalDate dataNascimento,String email,
                        String telefone ,String sexo, String cargo,
                        String departamento, String status, LocalDate dataAdmissao,
-                       LocalTime horario, BigDecimal salario){
+                       BigDecimal salario){
         super(cpf,nome,dataNascimento,email,telefone,sexo);
         this.cargo = cargo;
         this.departamento = departamento;
         this.status = status;
         this.dataAdmissao = dataAdmissao;
-        this.horario = horario;
         this.salario = salario;
 
     }
@@ -90,15 +86,21 @@ public class Funcionario extends Pessoa {
         this.dataAdmissao = dataAdmissao;
     }
 
-    public void setHorario(LocalTime horario) {
-        this.horario = horario;
-    }
-
     public void setSalario(BigDecimal salario) {
         this.salario = salario;
     }
 
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void removerEndereco() {
+        if (endereco != null) {
+            endereco.setFuncionario(null);
+        }
     }
 }
