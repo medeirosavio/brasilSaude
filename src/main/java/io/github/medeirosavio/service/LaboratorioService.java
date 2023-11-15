@@ -7,6 +7,7 @@ import io.github.medeirosavio.model.Endereco;
 import io.github.medeirosavio.model.Laboratorio;
 import io.github.medeirosavio.repository.EnderecoRepository;
 import io.github.medeirosavio.repository.LaboratorioRepository;
+import io.github.medeirosavio.util.CnpjValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +22,7 @@ public class LaboratorioService {
 
     public void cadastrarLaboratorio(LaboratorioDTO laboratorioDTO) {
         try {
+            validarCnpj(laboratorioDTO.getCnpj());
             Laboratorio laboratorio = converterDTOparaEntidade(laboratorioDTO);
             laboratorioRepository.save(laboratorio);
         } catch (DataIntegrityViolationException e) {
@@ -62,6 +64,12 @@ public class LaboratorioService {
         endereco.setEstado(enderecoDTO.getEstado());
         endereco.setCep(enderecoDTO.getCep());
         return endereco;
+    }
+
+    private void validarCnpj(String cnpj) {
+        if (!CnpjValidator.isValid(cnpj)) {
+            throw new IllegalArgumentException("CNPJ inválido: " + cnpj);
+        }
     }
 
 }

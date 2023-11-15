@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 public abstract class Empresa {
 
-    protected Long cnpj;
+    protected String cnpj;
     protected String nome;
     protected String telefone;
     protected String email;
@@ -17,7 +17,7 @@ public abstract class Empresa {
 
     }
 
-    public Empresa(Long cnpj, String nome, String telefone, String email,
+    public Empresa(String cnpj, String nome, String telefone, String email,
                    String site, LocalDate dataFundacao, String descricao,
                    String status){
         this.cnpj = cnpj;
@@ -31,7 +31,7 @@ public abstract class Empresa {
 
     }
 
-    public void setCnpj(Long cnpj) {
+    public void setCnpj(String cnpj) {
         this.cnpj = cnpj;
     }
 

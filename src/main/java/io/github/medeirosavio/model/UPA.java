@@ -18,14 +18,14 @@ public class UPA extends Empresa{
 
     public UPA(){super();}
 
-    public UPA(Long cnpj, String nome, String telefone, String email,
+    public UPA(String cnpj, String nome, String telefone, String email,
                        String site, LocalDate dataFundacao, String descricao,
                        String status){
         super(cnpj,nome,telefone,email,site,dataFundacao,descricao,status);
     }
 
     @Override
-    public void setCnpj(Long cnpj) {
+    public void setCnpj(String cnpj) {
         super.setCnpj(cnpj);
     }
 

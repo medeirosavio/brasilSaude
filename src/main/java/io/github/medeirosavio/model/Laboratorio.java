@@ -19,14 +19,14 @@ public class Laboratorio extends Empresa{
 
     public Laboratorio(){super();}
 
-    public Laboratorio(Long cnpj, String nome, String telefone, String email,
+    public Laboratorio(String cnpj, String nome, String telefone, String email,
                        String site, LocalDate dataFundacao, String descricao,
                        String status){
         super(cnpj,nome,telefone,email,site,dataFundacao,descricao,status);
     }
 
     @Override
-    public void setCnpj(Long cnpj) {
+    public void setCnpj(String cnpj) {
         super.setCnpj(cnpj);
     }
 

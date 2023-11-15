@@ -1,12 +1,17 @@
 package io.github.medeirosavio.service;
 
 import io.github.medeirosavio.dto.EnderecoDTO;
+import io.github.medeirosavio.dto.PacienteDTO;
 import io.github.medeirosavio.dto.UPADTO;
 import io.github.medeirosavio.exception.DataIntegrityViolationException;
+import io.github.medeirosavio.exception.DataNoPassadoException;
 import io.github.medeirosavio.model.Endereco;
+import io.github.medeirosavio.model.Paciente;
 import io.github.medeirosavio.model.UPA;
 import io.github.medeirosavio.repository.EnderecoRepository;
+import io.github.medeirosavio.repository.PacienteRepository;
 import io.github.medeirosavio.repository.UPARepository;
+import io.github.medeirosavio.util.CnpjValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,8 +24,12 @@ public class UPAService {
     @Autowired
     private EnderecoRepository enderecoRepository;
 
+    @Autowired
+    private PacienteRepository pacienteRepository;
+
     public void cadastrarUPA(UPADTO upadto) {
         try {
+            validarCnpj(upadto.getCnpj());
             UPA upa = converterDTOparaEntidade(upadto);
             upaRepository.save(upa);
         } catch (DataIntegrityViolationException e) {
@@ -65,4 +74,46 @@ public class UPAService {
         return endereco;
     }
 
+    public void cadastrarPaciente(PacienteDTO pacienteDTO) {
+        try {
+            Paciente paciente = converterDTOparaEntidade(pacienteDTO);
+            pacienteRepository.save(paciente);
+        } catch (DataIntegrityViolationException e) {
+            throw new DataIntegrityViolationException("Erro de integridade de dados ao cadastrar o paciente", e);
+        } catch (DataNoPassadoException e) {
+            throw new DataNoPassadoException("Erro a data deve ser anterior a data atual");
+        } catch (Exception e) {
+            throw new RuntimeException("Erro interno ao processar a solicitação", e);
+        }
+    }
+
+    private Paciente converterDTOparaEntidade(PacienteDTO pacienteDTO) {
+        Paciente paciente = new Paciente();
+        paciente.setCpf(pacienteDTO.getCpf());
+        paciente.setNome(pacienteDTO.getNome());
+        paciente.setDataNascimento(pacienteDTO.getDataNascimento());
+        paciente.setEmail(pacienteDTO.getEmail());
+        paciente.setSexo(pacienteDTO.getSexo());
+        paciente.setTelefone(pacienteDTO.getTelefone());
+        paciente.setDataInicioSintomas(pacienteDTO.getDataInicioSintomas());
+        paciente.setDataInternacao(pacienteDTO.getDataInternacao());
+        try {
+            Endereco endereco = converterEnderecoDTOparaEntidade(pacienteDTO.getEndereco());
+            paciente.setEndereco(endereco);
+            enderecoRepository.save(endereco);
+        } catch (DataIntegrityViolationException e) {
+            throw new DataIntegrityViolationException("Erro de integridade de dados ao cadastrar o endereço", e);
+        } catch (Exception e) {
+            throw new RuntimeException("Erro interno ao processar a solicitação", e);
+        }
+        return paciente;
+    }
+
+    private void validarCnpj(String cnpj) {
+        if (!CnpjValidator.isValid(cnpj)) {
+            throw new IllegalArgumentException("CNPJ inválido: " + cnpj);
+        }
+    }
 }
+
+

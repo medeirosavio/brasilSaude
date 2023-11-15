@@ -76,4 +76,12 @@ public class Paciente extends Pessoa{
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
     }
+
+    public LocalDate getDataInternacao() {
+        return dataInternacao;
+    }
+
+    public LocalDate getDataInicioSintomas() {
+        return dataInicioSintomas;
+    }
 }

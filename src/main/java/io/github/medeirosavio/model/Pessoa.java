@@ -45,4 +45,8 @@ public abstract class Pessoa {
     public void setSexo(String sexo) {
         this.sexo = sexo;
     }
+
+    public Long getCpf() {
+        return cpf;
+    }
 }

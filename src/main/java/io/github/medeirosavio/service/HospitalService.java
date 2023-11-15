@@ -6,6 +6,7 @@ import io.github.medeirosavio.model.Endereco;
 import io.github.medeirosavio.model.Hospital;
 import io.github.medeirosavio.repository.EnderecoRepository;
 import io.github.medeirosavio.repository.HospitalRepository;
+import io.github.medeirosavio.util.CnpjValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import io.github.medeirosavio.exception.DataIntegrityViolationException;
@@ -21,6 +22,7 @@ public class HospitalService {
 
     public void cadastrarHospital(HospitalDTO hospitalDTO) {
         try {
+            validarCnpj(hospitalDTO.getCnpj());
             Hospital hospital = converterDTOparaEntidade(hospitalDTO);
             hospitalRepository.save(hospital);
         } catch (DataIntegrityViolationException e) {
@@ -63,6 +65,12 @@ public class HospitalService {
         endereco.setCep(enderecoDTO.getCep());
 
         return endereco;
+    }
+
+    private void validarCnpj(String cnpj) {
+        if (!CnpjValidator.isValid(cnpj)) {
+            throw new IllegalArgumentException("CNPJ inválido: " + cnpj);
+        }
     }
 
 }

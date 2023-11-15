@@ -11,7 +11,7 @@ import java.time.LocalDate;
 public class UPADTO {
 
     @NotNull
-    private Long cnpj;
+    private String cnpj;
     @NotBlank
     private String nome;
     @NotBlank
@@ -32,7 +32,7 @@ public class UPADTO {
 
     }
 
-    public UPADTO(Long cnpj, String nome, String telefone, String email,
+    public UPADTO(String cnpj, String nome, String telefone, String email,
                        String site, LocalDate dataFundacao, String descricao,
                        String status, EnderecoDTO endereco){
         this.cnpj = cnpj;
@@ -46,7 +46,7 @@ public class UPADTO {
         this.endereco = endereco;
     }
 
-    public Long getCnpj() {
+    public String getCnpj() {
         return cnpj;
     }
 

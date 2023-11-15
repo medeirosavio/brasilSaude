@@ -22,7 +22,6 @@ public class PacienteDTO {
     private String telefone;
     @NotBlank
     private String sexo;
-    @javax.validation.constraints.NotNull
     private LocalDate dataInternacao;
     @NotNull
     @Past

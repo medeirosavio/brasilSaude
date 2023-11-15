@@ -10,7 +10,7 @@ import java.time.LocalDate;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class LaboratorioDTO {
     @NotNull
-    private Long cnpj;
+    private String cnpj;
     @NotBlank
     private String nome;
     @NotBlank
@@ -30,7 +30,7 @@ public class LaboratorioDTO {
 
     }
 
-    public LaboratorioDTO(Long cnpj, String nome, String telefone, String email,
+    public LaboratorioDTO(String cnpj, String nome, String telefone, String email,
                        String site, LocalDate dataFundacao, String descricao,
                        String status,EnderecoDTO endereco){
         this.cnpj = cnpj;
@@ -44,7 +44,7 @@ public class LaboratorioDTO {
         this.endereco = endereco;
     }
 
-    public Long getCnpj() {
+    public String getCnpj() {
         return cnpj;
     }
 

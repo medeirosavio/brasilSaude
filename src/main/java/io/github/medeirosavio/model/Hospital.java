@@ -17,14 +17,14 @@ public class Hospital extends Empresa{
 
     public Hospital(){super();}
 
-    public Hospital(Long cnpj, String nome, String telefone, String email,
+    public Hospital(String cnpj, String nome, String telefone, String email,
                String site, LocalDate dataFundacao, String descricao,
                String status){
         super(cnpj,nome,telefone,email,site,dataFundacao,descricao,status);
     }
 
     @Override
-    public void setCnpj(Long cnpj) {
+    public void setCnpj(String cnpj) {
         super.setCnpj(cnpj);
     }
 
