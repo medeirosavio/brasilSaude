@@ -5,6 +5,7 @@ import io.github.medeirosavio.model.Hospital;
 import io.github.medeirosavio.repository.HospitalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import io.github.medeirosavio.exception.DataIntegrityViolationException;
 
 @Service
 public class HospitalService {
@@ -12,7 +13,18 @@ public class HospitalService {
     @Autowired
     private HospitalRepository hospitalRepository;
 
-    public Hospital cadastrarHospital(HospitalDTO hospitalDTO){
+    public void cadastrarHospital(HospitalDTO hospitalDTO) {
+        try {
+            Hospital hospital = converterDTOparaEntidade(hospitalDTO);
+            hospitalRepository.save(hospital);
+        } catch (DataIntegrityViolationException e) {
+            throw new DataIntegrityViolationException("Erro de integridade de dados ao cadastrar o hospital", e);
+        } catch (Exception e) {
+            throw new RuntimeException("Erro interno ao processar a solicitação", e);
+        }
+    }
+
+    private Hospital converterDTOparaEntidade(HospitalDTO hospitalDTO) {
         Hospital hospital = new Hospital();
         hospital.setCnpj(hospitalDTO.getCnpj());
         hospital.setNome(hospitalDTO.getNome());
@@ -22,8 +34,7 @@ public class HospitalService {
         hospital.setDataFundacao(hospitalDTO.getDataFundacao());
         hospital.setDescricao(hospitalDTO.getDescricao());
         hospital.setStatus(hospitalDTO.getStatus());
-
-        return hospitalRepository.save(hospital);
+        return hospital;
     }
 
 }
