@@ -13,7 +13,7 @@ import java.time.LocalDate;
 public class FuncionarioDTO {
 
     @javax.validation.constraints.NotNull
-    private Long cpf;
+    private String cpf;
     @NotBlank
     private String nome;
     @NotNull
@@ -43,7 +43,7 @@ public class FuncionarioDTO {
 
     }
 
-    public FuncionarioDTO(Long cpf, String nome, LocalDate dataNascimento,
+    public FuncionarioDTO(String cpf, String nome, LocalDate dataNascimento,
                           String email, String telefone,String sexo,
                           String cargo, String departamento,
                           String status, LocalDate dataAdmissao,
@@ -62,7 +62,7 @@ public class FuncionarioDTO {
         this.endereco = endereco;
     }
 
-    public Long getCpf() {
+    public String getCpf() {
         return cpf;
     }
 

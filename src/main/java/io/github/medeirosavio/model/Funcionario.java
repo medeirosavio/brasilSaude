@@ -23,7 +23,7 @@ public class Funcionario extends Pessoa {
 
     public Funcionario(){super();}
 
-    public Funcionario(Long cpf, String nome, LocalDate dataNascimento,String email,
+    public Funcionario(String cpf, String nome, LocalDate dataNascimento,String email,
                        String telefone ,String sexo, String cargo,
                        String departamento, String status, LocalDate dataAdmissao,
                        BigDecimal salario){
@@ -36,12 +36,8 @@ public class Funcionario extends Pessoa {
 
     }
 
-    public Funcionario(Long cpf, String nome, LocalDate dataNascimento, String email, String telefone, String sexo) {
-        super(cpf, nome, dataNascimento, email, telefone, sexo);
-    }
-
     @Override
-    public void setCpf(Long cpf) {
+    public void setCpf(String cpf) {
         super.setCpf(cpf);
     }
 

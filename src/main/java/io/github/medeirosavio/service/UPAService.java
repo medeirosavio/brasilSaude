@@ -11,6 +11,7 @@ import io.github.medeirosavio.repository.EnderecoRepository;
 import io.github.medeirosavio.repository.PacienteRepository;
 import io.github.medeirosavio.repository.UPARepository;
 import io.github.medeirosavio.util.CnpjValidator;
+import io.github.medeirosavio.util.CpfValidator;
 import io.github.medeirosavio.util.DatePastValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -80,6 +81,7 @@ public class UPAService {
         try {
             validarDataNoPassado(pacienteDTO.getDataInicioSintomas());
             validarDataNoPassado(pacienteDTO.getDataNascimento());
+            validarCpf(pacienteDTO.getCpf());
             Paciente paciente = converterDTOparaEntidade(pacienteDTO);
             pacienteRepository.save(paciente);
         } catch (DataIntegrityViolationException e) {
@@ -120,6 +122,12 @@ public class UPAService {
     private void validarDataNoPassado(LocalDate data) {
         if (data != null && !DatePastValidator.isPastDate(data)) {
             throw new IllegalArgumentException("A data de fundação deve estar no passado.");
+        }
+    }
+
+    private void validarCpf(String cpf) {
+        if (!CpfValidator.isValid(cpf)) {
+            throw new IllegalArgumentException("CPF inválido" + cpf);
         }
     }
 }

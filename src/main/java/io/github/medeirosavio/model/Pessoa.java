@@ -2,7 +2,7 @@ package io.github.medeirosavio.model;
 
 import java.time.LocalDate;
 public abstract class Pessoa {
-    protected Long cpf;
+    protected String cpf;
     protected String nome;
     protected LocalDate dataNascimento;
     protected String email;
@@ -12,7 +12,7 @@ public abstract class Pessoa {
     public Pessoa() {
 
     }
-    public Pessoa(Long cpf, String nome, LocalDate dataNascimento,
+    public Pessoa(String cpf, String nome, LocalDate dataNascimento,
                   String email, String telefone,String sexo){
         this.cpf = cpf;
         this.nome = nome;
@@ -22,7 +22,7 @@ public abstract class Pessoa {
         this.sexo = sexo;
     }
 
-    public void setCpf(Long cpf) {
+    public void setCpf(String cpf) {
         this.cpf = cpf;
     }
 
@@ -46,7 +46,7 @@ public abstract class Pessoa {
         this.sexo = sexo;
     }
 
-    public Long getCpf() {
+    public String getCpf() {
         return cpf;
     }
 }

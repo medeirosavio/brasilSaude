@@ -10,7 +10,7 @@ import java.time.LocalDate;
 public class PacienteDTO {
 
     @javax.validation.constraints.NotNull
-    private Long cpf;
+    private String cpf;
     @NotBlank
     private String nome;
     @javax.validation.constraints.NotNull
@@ -33,7 +33,7 @@ public class PacienteDTO {
 
     }
 
-    public PacienteDTO(Long cpf, String nome, LocalDate dataNascimento,
+    public PacienteDTO(String cpf, String nome, LocalDate dataNascimento,
                        String email, String telefone,String sexo,
                        LocalDate dataInicioSintomas, LocalDate dataInternacao,
                        EnderecoDTO endereco){
@@ -48,7 +48,7 @@ public class PacienteDTO {
         this.endereco = endereco;
     }
 
-    public Long getCpf() {
+    public String getCpf() {
         return cpf;
     }
 

@@ -23,7 +23,7 @@ public class Paciente extends Pessoa{
         super();
     }
 
-    public Paciente(Long cpf, String nome, LocalDate dataNascimento,String email,
+    public Paciente(String cpf, String nome, LocalDate dataNascimento,String email,
                     String telefone ,String sexo, LocalDate dataInicioSintomas,
                     LocalDate dataInternacao ){
         super(cpf,nome,dataNascimento,email,telefone,sexo);
@@ -31,12 +31,12 @@ public class Paciente extends Pessoa{
         this.dataInternacao = dataInternacao;
     }
 
-    public Paciente(Long cpf, String nome, LocalDate dataNascimento, String email, String telefone, String sexo) {
+    public Paciente(String cpf, String nome, LocalDate dataNascimento, String email, String telefone, String sexo) {
         super(cpf, nome, dataNascimento, email, telefone, sexo);
     }
 
     @Override
-    public void setCpf(Long cpf) {
+    public void setCpf(String cpf) {
         super.setCpf(cpf);
     }
 
