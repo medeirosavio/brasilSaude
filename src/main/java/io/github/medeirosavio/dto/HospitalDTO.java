@@ -27,18 +27,6 @@ public class HospitalDTO {
     @NotNull
     @Enumerated(EnumType.STRING)
     private Status status;
-    @NotNull
-    @Positive
-    private Integer leitosEnfermariaTotal;
-    @NotNull
-    @Min(value = 0)
-    private Integer leitosEnfermariaDisponiveis;
-    @NotNull
-    @Positive
-    private Integer leitosUtiTotal;
-    @NotNull
-    @Min(value = 0)
-    private Integer leitosUtiDisponiveis;
 
     private EnderecoDTO endereco;
 
@@ -48,9 +36,7 @@ public class HospitalDTO {
 
     public HospitalDTO(String cnpj, String nome, String telefone, String email,
                        String site, LocalDate dataFundacao, String descricao,
-                       Status status, EnderecoDTO endereco, Integer leitosEnfermariaTotal
-            ,          Integer leitosEnfermariaDisponiveis, Integer leitosUtiTotal,
-                       Integer leitosUtiDisponiveis){
+                       Status status, EnderecoDTO endereco){
         this.cnpj = cnpj;
         this.nome = nome;
         this.telefone = telefone;
@@ -60,10 +46,6 @@ public class HospitalDTO {
         this.descricao = descricao;
         this.status = status;
         this.endereco = endereco;
-        this.leitosEnfermariaTotal = leitosEnfermariaTotal;
-        this.leitosEnfermariaDisponiveis = leitosEnfermariaDisponiveis;
-        this.leitosUtiTotal = leitosUtiTotal;
-        this.leitosUtiDisponiveis = leitosUtiDisponiveis;
     }
 
     public String getCnpj() {
@@ -138,35 +120,4 @@ public class HospitalDTO {
         this.cnpj = cnpj;
     }
 
-    public Integer getLeitosEnfermariaTotal() {
-        return leitosEnfermariaTotal;
-    }
-
-    public void setLeitosEnfermariaTotal(Integer leitosEnfermariaTotal) {
-        this.leitosEnfermariaTotal = leitosEnfermariaTotal;
-    }
-
-    public Integer getLeitosEnfermariaDisponiveis() {
-        return leitosEnfermariaDisponiveis;
-    }
-
-    public void setLeitosEnfermariaDisponiveis(Integer leitosEnfermariaDisponiveis) {
-        this.leitosEnfermariaDisponiveis = leitosEnfermariaDisponiveis;
-    }
-
-    public Integer getLeitosUtiTotal() {
-        return leitosUtiTotal;
-    }
-
-    public void setLeitosUtiTotal(Integer leitosUtiTotal) {
-        this.leitosUtiTotal = leitosUtiTotal;
-    }
-
-    public Integer getLeitosUtiDisponiveis() {
-        return leitosUtiDisponiveis;
-    }
-
-    public void setLeitosUtiDisponiveis(Integer leitosUtiDisponiveis) {
-        this.leitosUtiDisponiveis = leitosUtiDisponiveis;
-    }
 }
