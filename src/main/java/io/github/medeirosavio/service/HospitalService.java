@@ -7,6 +7,7 @@ import io.github.medeirosavio.model.Hospital;
 import io.github.medeirosavio.repository.EnderecoRepository;
 import io.github.medeirosavio.repository.HospitalRepository;
 import io.github.medeirosavio.util.CnpjValidator;
+import io.github.medeirosavio.util.NumberPositiveValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import io.github.medeirosavio.exception.DataIntegrityViolationException;
@@ -23,6 +24,12 @@ public class HospitalService {
     public void cadastrarHospital(HospitalDTO hospitalDTO) {
         try {
             validarCnpj(hospitalDTO.getCnpj());
+            validarLeitosMaiorIgualaZero(hospitalDTO.getLeitosEnfermariaDisponiveis());
+            validarLeitosMaiorIgualaZero(hospitalDTO.getLeitosUtiDisponiveis());
+            validarLeitosMaiorqueZero(hospitalDTO.getLeitosUtiTotal());
+            validarLeitosMaiorqueZero(hospitalDTO.getLeitosEnfermariaTotal());
+            validarMaior(hospitalDTO.getLeitosEnfermariaTotal(),hospitalDTO.getLeitosEnfermariaDisponiveis());
+            validarMaior(hospitalDTO.getLeitosUtiTotal(),hospitalDTO.getLeitosUtiDisponiveis());
             Hospital hospital = converterDTOparaEntidade(hospitalDTO);
             hospitalRepository.save(hospital);
         } catch (DataIntegrityViolationException e) {
@@ -42,6 +49,10 @@ public class HospitalService {
         hospital.setDataFundacao(hospitalDTO.getDataFundacao());
         hospital.setDescricao(hospitalDTO.getDescricao());
         hospital.setStatus(hospitalDTO.getStatus());
+        hospital.setLeitosEnfermariaTotal(hospitalDTO.getLeitosEnfermariaTotal());
+        hospital.setLeitosEnfermariaDisponiveis(hospitalDTO.getLeitosEnfermariaDisponiveis());
+        hospital.setLeitosUtiTotal(hospitalDTO.getLeitosUtiTotal());
+        hospital.setLeitosUtiDisponiveis(hospitalDTO.getLeitosUtiDisponiveis());
         try {
             Endereco endereco = converterEnderecoDTOparaEntidade(hospitalDTO.getEndereco());
             hospital.setEndereco(endereco);
@@ -71,6 +82,17 @@ public class HospitalService {
         if (!CnpjValidator.isValid(cnpj)) {
             throw new IllegalArgumentException("CNPJ inválido: " + cnpj);
         }
+    }
+    private void validarLeitosMaiorqueZero(Integer leitosUtiTotal) {
+        NumberPositiveValidator.validateMaiorQueZero(leitosUtiTotal, "Leitos de UTI");
+    }
+
+    private void validarLeitosMaiorIgualaZero(Integer leitosUtiTotal) {
+        NumberPositiveValidator.validateMenorIgualZero(leitosUtiTotal, "Leitos de UTI");
+    }
+
+    private void validarMaior(Integer leitosTotal, Integer leitosDisponiveis){
+        NumberPositiveValidator.validateMaiorQueOutro(leitosTotal, leitosDisponiveis, "Leitos de UTI");
     }
 
 }
