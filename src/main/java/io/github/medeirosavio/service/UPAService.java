@@ -4,7 +4,6 @@ import io.github.medeirosavio.dto.EnderecoDTO;
 import io.github.medeirosavio.dto.PacienteDTO;
 import io.github.medeirosavio.dto.UPADTO;
 import io.github.medeirosavio.exception.DataIntegrityViolationException;
-import io.github.medeirosavio.exception.DataNoPassadoException;
 import io.github.medeirosavio.model.Endereco;
 import io.github.medeirosavio.model.Paciente;
 import io.github.medeirosavio.model.UPA;
@@ -12,8 +11,11 @@ import io.github.medeirosavio.repository.EnderecoRepository;
 import io.github.medeirosavio.repository.PacienteRepository;
 import io.github.medeirosavio.repository.UPARepository;
 import io.github.medeirosavio.util.CnpjValidator;
+import io.github.medeirosavio.util.DatePastValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
 
 @Service
 public class UPAService {
@@ -76,12 +78,12 @@ public class UPAService {
 
     public void cadastrarPaciente(PacienteDTO pacienteDTO) {
         try {
+            validarDataNoPassado(pacienteDTO.getDataInicioSintomas());
+            validarDataNoPassado(pacienteDTO.getDataNascimento());
             Paciente paciente = converterDTOparaEntidade(pacienteDTO);
             pacienteRepository.save(paciente);
         } catch (DataIntegrityViolationException e) {
             throw new DataIntegrityViolationException("Erro de integridade de dados ao cadastrar o paciente", e);
-        } catch (DataNoPassadoException e) {
-            throw new DataNoPassadoException("Erro a data deve ser anterior a data atual");
         } catch (Exception e) {
             throw new RuntimeException("Erro interno ao processar a solicitação", e);
         }
@@ -112,6 +114,12 @@ public class UPAService {
     private void validarCnpj(String cnpj) {
         if (!CnpjValidator.isValid(cnpj)) {
             throw new IllegalArgumentException("CNPJ inválido: " + cnpj);
+        }
+    }
+
+    private void validarDataNoPassado(LocalDate data) {
+        if (data != null && !DatePastValidator.isPastDate(data)) {
+            throw new IllegalArgumentException("A data de fundação deve estar no passado.");
         }
     }
 }

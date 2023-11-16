@@ -35,9 +35,9 @@ public class EmpresaController {
             return new ResponseEntity<>("Paciente não encontrado", HttpStatus.NOT_FOUND);
         } catch (DataIntegrityViolationException e) {
             return new ResponseEntity<>("Erro de integridade de dados ao cadastrar o paciente", HttpStatus.BAD_REQUEST);
-        } catch (Exception e) {
+        }/* catch (Exception e) {
             return new ResponseEntity<>("Erro interno ao processar a solicitação", HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        }*/
     }
 
 
