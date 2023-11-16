@@ -24,10 +24,10 @@ public class Funcionario extends Pessoa {
     public Funcionario(){super();}
 
     public Funcionario(String cpf, String nome, LocalDate dataNascimento,String email,
-                       String telefone ,String sexo, String cargo,
+                       String telefone ,String cargo,
                        String departamento, String status, LocalDate dataAdmissao,
                        BigDecimal salario){
-        super(cpf,nome,dataNascimento,email,telefone,sexo);
+        super(cpf,nome,dataNascimento,email,telefone);
         this.cargo = cargo;
         this.departamento = departamento;
         this.status = status;
@@ -59,11 +59,6 @@ public class Funcionario extends Pessoa {
     @Override
     public void setTelefone(String telefone) {
         super.setTelefone(telefone);
-    }
-
-    @Override
-    public void setSexo(String sexo) {
-        super.setSexo(sexo);
     }
 
     public void setCargo(String cargo) {

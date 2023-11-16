@@ -24,15 +24,11 @@ public class Paciente extends Pessoa{
     }
 
     public Paciente(String cpf, String nome, LocalDate dataNascimento,String email,
-                    String telefone ,String sexo, LocalDate dataInicioSintomas,
+                    String telefone , LocalDate dataInicioSintomas,
                     LocalDate dataInternacao ){
-        super(cpf,nome,dataNascimento,email,telefone,sexo);
+        super(cpf,nome,dataNascimento,email,telefone);
         this.dataInicioSintomas = dataInicioSintomas;
         this.dataInternacao = dataInternacao;
-    }
-
-    public Paciente(String cpf, String nome, LocalDate dataNascimento, String email, String telefone, String sexo) {
-        super(cpf, nome, dataNascimento, email, telefone, sexo);
     }
 
     @Override
@@ -60,11 +56,6 @@ public class Paciente extends Pessoa{
         super.setTelefone(telefone);
     }
 
-    @Override
-    public void setSexo(String sexo) {
-        super.setSexo(sexo);
-    }
-
     public void setDataInternacao(LocalDate dataInternacao) {
         this.dataInternacao = dataInternacao;
     }
@@ -77,11 +68,5 @@ public class Paciente extends Pessoa{
         this.endereco = endereco;
     }
 
-    public LocalDate getDataInternacao() {
-        return dataInternacao;
-    }
 
-    public LocalDate getDataInicioSintomas() {
-        return dataInicioSintomas;
-    }
 }

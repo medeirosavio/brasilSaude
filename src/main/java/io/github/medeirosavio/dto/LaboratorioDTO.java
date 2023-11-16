@@ -1,7 +1,10 @@
 package io.github.medeirosavio.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import io.github.medeirosavio.model.Status;
 
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
@@ -23,7 +26,9 @@ public class LaboratorioDTO {
     @Past
     private LocalDate dataFundacao;
     private String descricao;
-    private String status;
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    private Status status;
     private EnderecoDTO endereco;
 
     public LaboratorioDTO(){
@@ -32,7 +37,7 @@ public class LaboratorioDTO {
 
     public LaboratorioDTO(String cnpj, String nome, String telefone, String email,
                        String site, LocalDate dataFundacao, String descricao,
-                       String status,EnderecoDTO endereco){
+                       Status status,EnderecoDTO endereco){
         this.cnpj = cnpj;
         this.nome = nome;
         this.telefone = telefone;
@@ -96,11 +101,11 @@ public class LaboratorioDTO {
         this.descricao = descricao;
     }
 
-    public String getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 

@@ -1,5 +1,7 @@
 package io.github.medeirosavio.model;
 
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import java.time.LocalDate;
 
 public abstract class Empresa {
@@ -11,15 +13,15 @@ public abstract class Empresa {
     protected String site;
     protected LocalDate dataFundacao;
     protected String descricao;
-    protected String status;
+    @Enumerated(EnumType.STRING)
+    protected Status status;
 
     public Empresa(){
 
     }
 
     public Empresa(String cnpj, String nome, String telefone, String email,
-                   String site, LocalDate dataFundacao, String descricao,
-                   String status){
+                   String site, LocalDate dataFundacao, String descricao){
         this.cnpj = cnpj;
         this.nome = nome;
         this.telefone = telefone;
@@ -27,8 +29,6 @@ public abstract class Empresa {
         this.site = site;
         this.dataFundacao = dataFundacao;
         this.descricao = descricao;
-        this.status = status;
-
     }
 
     public void setCnpj(String cnpj) {
@@ -59,7 +59,7 @@ public abstract class Empresa {
         this.descricao = descricao;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 }

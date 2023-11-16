@@ -19,9 +19,8 @@ public class UPA extends Empresa{
     public UPA(){super();}
 
     public UPA(String cnpj, String nome, String telefone, String email,
-                       String site, LocalDate dataFundacao, String descricao,
-                       String status){
-        super(cnpj,nome,telefone,email,site,dataFundacao,descricao,status);
+                       String site, LocalDate dataFundacao, String descricao){
+        super(cnpj,nome,telefone,email,site,dataFundacao,descricao);
     }
 
     @Override
@@ -60,7 +59,7 @@ public class UPA extends Empresa{
     }
 
     @Override
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         super.setStatus(status);
     }
 

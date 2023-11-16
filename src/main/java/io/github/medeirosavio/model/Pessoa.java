@@ -1,5 +1,7 @@
 package io.github.medeirosavio.model;
 
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import java.time.LocalDate;
 public abstract class Pessoa {
     protected String cpf;
@@ -7,19 +9,19 @@ public abstract class Pessoa {
     protected LocalDate dataNascimento;
     protected String email;
     protected String telefone;
-    protected String sexo;
+    @Enumerated(EnumType.STRING)
+    protected Sexo sexo;
 
     public Pessoa() {
 
     }
     public Pessoa(String cpf, String nome, LocalDate dataNascimento,
-                  String email, String telefone,String sexo){
+                  String email, String telefone){
         this.cpf = cpf;
         this.nome = nome;
         this.dataNascimento = dataNascimento;
         this.email = email;
         this.telefone = telefone;
-        this.sexo = sexo;
     }
 
     public void setCpf(String cpf) {
@@ -42,11 +44,11 @@ public abstract class Pessoa {
         this.telefone = telefone;
     }
 
-    public void setSexo(String sexo) {
-        this.sexo = sexo;
+    public Sexo getSexo() {
+        return sexo;
     }
 
-    public String getCpf() {
-        return cpf;
+    public void setSexo(Sexo sexo) {
+        this.sexo = sexo;
     }
 }

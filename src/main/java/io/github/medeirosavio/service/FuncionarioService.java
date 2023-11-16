@@ -6,11 +6,15 @@ import io.github.medeirosavio.exception.DataIntegrityViolationException;
 import io.github.medeirosavio.exception.NotFoundException;
 import io.github.medeirosavio.model.Endereco;
 import io.github.medeirosavio.model.Funcionario;
+import io.github.medeirosavio.model.Paciente;
 import io.github.medeirosavio.repository.EnderecoRepository;
 import io.github.medeirosavio.repository.FuncionarioRepository;
+import io.github.medeirosavio.util.CpfValidator;
+import io.github.medeirosavio.util.DatePastValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
+import java.time.LocalDate;
 import java.util.Optional;
 
 @Service
@@ -24,6 +28,8 @@ public class FuncionarioService {
 
     public void cadastrarFuncionario(FuncionarioDTO funcionarioDTO) {
         try {
+            validarDataNoPassado(funcionarioDTO.getDataNascimento());
+            validarCpf(funcionarioDTO.getCpf());
             Funcionario funcionario = converterDTOparaEntidade(funcionarioDTO);
             funcionarioRepository.save(funcionario);
         } catch (DataIntegrityViolationException e) {
@@ -79,6 +85,18 @@ public class FuncionarioService {
 
         funcionario.removerEndereco();
         funcionarioRepository.delete(funcionario);
+    }
+
+    private void validarDataNoPassado(LocalDate data) {
+        if (data != null && !DatePastValidator.isPastDate(data)) {
+            throw new IllegalArgumentException("A data de fundação deve estar no passado.");
+        }
+    }
+
+    private void validarCpf(String cpf) {
+        if (!CpfValidator.isValid(cpf)) {
+            throw new IllegalArgumentException("CPF inválido" + cpf);
+        }
     }
 
 

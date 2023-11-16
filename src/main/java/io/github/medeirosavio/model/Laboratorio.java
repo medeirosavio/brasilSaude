@@ -20,9 +20,8 @@ public class Laboratorio extends Empresa{
     public Laboratorio(){super();}
 
     public Laboratorio(String cnpj, String nome, String telefone, String email,
-                       String site, LocalDate dataFundacao, String descricao,
-                       String status){
-        super(cnpj,nome,telefone,email,site,dataFundacao,descricao,status);
+                       String site, LocalDate dataFundacao, String descricao){
+        super(cnpj,nome,telefone,email,site,dataFundacao,descricao);
     }
 
     @Override
@@ -61,7 +60,7 @@ public class Laboratorio extends Empresa{
     }
 
     @Override
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         super.setStatus(status);
     }
 

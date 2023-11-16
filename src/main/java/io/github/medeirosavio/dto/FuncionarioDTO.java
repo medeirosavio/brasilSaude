@@ -1,7 +1,10 @@
 package io.github.medeirosavio.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import io.github.medeirosavio.model.Sexo;
 
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -23,8 +26,9 @@ public class FuncionarioDTO {
     private String email;
     @NotBlank
     private String telefone;
-    @NotBlank
-    private String sexo;
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    private Sexo sexo;
     @NotBlank
     private String cargo;
     @NotBlank
@@ -44,7 +48,7 @@ public class FuncionarioDTO {
     }
 
     public FuncionarioDTO(String cpf, String nome, LocalDate dataNascimento,
-                          String email, String telefone,String sexo,
+                          String email, String telefone,Sexo sexo,
                           String cargo, String departamento,
                           String status, LocalDate dataAdmissao,
                           BigDecimal salario, EnderecoDTO endereco){
@@ -98,11 +102,11 @@ public class FuncionarioDTO {
         this.telefone = telefone;
     }
 
-    public String getSexo() {
+    public Sexo getSexo() {
         return sexo;
     }
 
-    public void setSexo(String sexo) {
+    public void setSexo(Sexo sexo) {
         this.sexo = sexo;
     }
 

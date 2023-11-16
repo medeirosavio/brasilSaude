@@ -1,7 +1,10 @@
 package io.github.medeirosavio.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import io.github.medeirosavio.model.Sexo;
 
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
@@ -20,8 +23,9 @@ public class PacienteDTO {
     private String email;
     @NotBlank
     private String telefone;
-    @NotBlank
-    private String sexo;
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    private Sexo sexo;
     private LocalDate dataInternacao;
     @NotNull
     @Past
@@ -34,7 +38,7 @@ public class PacienteDTO {
     }
 
     public PacienteDTO(String cpf, String nome, LocalDate dataNascimento,
-                       String email, String telefone,String sexo,
+                       String email, String telefone,
                        LocalDate dataInicioSintomas, LocalDate dataInternacao,
                        EnderecoDTO endereco){
         this.cpf = cpf;
@@ -42,7 +46,6 @@ public class PacienteDTO {
         this.dataNascimento = dataNascimento;
         this.email = email;
         this.telefone = telefone;
-        this.sexo = sexo;
         this.dataInicioSintomas = dataInicioSintomas;
         this.dataInternacao = dataInternacao;
         this.endereco = endereco;
@@ -84,11 +87,11 @@ public class PacienteDTO {
         this.telefone = telefone;
     }
 
-    public String getSexo() {
+    public Sexo getSexo() {
         return sexo;
     }
 
-    public void setSexo(String sexo) {
+    public void setSexo(Sexo sexo) {
         this.sexo = sexo;
     }
 
