@@ -17,6 +17,10 @@ public class RegistroOcupacao {
     @JoinColumn(name = "id_leito")
     private Leito leito;
 
+    @ManyToOne
+    @JoinColumn(name = "hospital_id")
+    private Hospital hospital;
+
 
 
 }

@@ -15,14 +15,13 @@ public class Paciente extends Pessoa{
     private Long id;
     private LocalDate dataInternacao;
     private LocalDate dataInicioSintomas;
-
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "endereco_id")
     @JsonIgnore
     private Endereco endereco;
-
-    @OneToMany(mappedBy = "leito")
-    private List<RegistroOcupacao> registrosOcupacao = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "id_upa")
+    UPA upa;
 
     public Paciente() {
         super();
@@ -73,5 +72,7 @@ public class Paciente extends Pessoa{
         this.endereco = endereco;
     }
 
-
+    public void setUpa(UPA upa) {
+        this.upa = upa;
+    }
 }

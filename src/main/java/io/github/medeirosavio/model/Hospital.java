@@ -6,6 +6,9 @@ import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Positive;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 public class Hospital extends Empresa{
     @Id
@@ -16,6 +19,9 @@ public class Hospital extends Empresa{
     @JoinColumn(name = "endereco_id")
     @JsonIgnore
     private Endereco endereco;
+
+    @OneToMany(mappedBy = "hospital")
+    private List<RegistroOcupacao> registrosOcupacao = new ArrayList<>();
 
     public Hospital(){super();}
 

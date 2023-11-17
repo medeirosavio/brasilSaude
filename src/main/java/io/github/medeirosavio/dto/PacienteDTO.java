@@ -30,7 +30,6 @@ public class PacienteDTO {
     @NotNull
     @Past
     private LocalDate dataInicioSintomas;
-
     private EnderecoDTO endereco;
 
     public PacienteDTO(){

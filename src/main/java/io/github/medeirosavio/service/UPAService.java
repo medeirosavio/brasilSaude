@@ -77,59 +77,13 @@ public class UPAService {
         return endereco;
     }
 
-    public void cadastrarPaciente(PacienteDTO pacienteDTO) {
-        try {
-            validarDataNoPassado(pacienteDTO.getDataInicioSintomas());
-            validarDataNoPassado(pacienteDTO.getDataNascimento());
-            validarCpf(pacienteDTO.getCpf());
-            Paciente paciente = converterDTOparaEntidade(pacienteDTO);
-            pacienteRepository.save(paciente);
-        } catch (DataIntegrityViolationException e) {
-            throw new DataIntegrityViolationException("Erro de integridade de dados ao cadastrar o paciente", e);
-        } catch (Exception e) {
-            throw new RuntimeException("Erro interno ao processar a solicitação", e);
-        }
-    }
-
-    private Paciente converterDTOparaEntidade(PacienteDTO pacienteDTO) {
-        Paciente paciente = new Paciente();
-        paciente.setCpf(pacienteDTO.getCpf());
-        paciente.setNome(pacienteDTO.getNome());
-        paciente.setDataNascimento(pacienteDTO.getDataNascimento());
-        paciente.setEmail(pacienteDTO.getEmail());
-        paciente.setSexo(pacienteDTO.getSexo());
-        paciente.setTelefone(pacienteDTO.getTelefone());
-        paciente.setDataInicioSintomas(pacienteDTO.getDataInicioSintomas());
-        paciente.setDataInternacao(pacienteDTO.getDataInternacao());
-        try {
-            Endereco endereco = converterEnderecoDTOparaEntidade(pacienteDTO.getEndereco());
-            paciente.setEndereco(endereco);
-            enderecoRepository.save(endereco);
-        } catch (DataIntegrityViolationException e) {
-            throw new DataIntegrityViolationException("Erro de integridade de dados ao cadastrar o endereço", e);
-        } catch (Exception e) {
-            throw new RuntimeException("Erro interno ao processar a solicitação", e);
-        }
-        return paciente;
-    }
-
     private void validarCnpj(String cnpj) {
         if (!CnpjValidator.isValid(cnpj)) {
             throw new IllegalArgumentException("CNPJ inválido: " + cnpj);
         }
     }
 
-    private void validarDataNoPassado(LocalDate data) {
-        if (data != null && !DatePastValidator.isPastDate(data)) {
-            throw new IllegalArgumentException("A data de fundação deve estar no passado.");
-        }
-    }
 
-    private void validarCpf(String cpf) {
-        if (!CpfValidator.isValid(cpf)) {
-            throw new IllegalArgumentException("CPF inválido" + cpf);
-        }
-    }
 }
 
 
