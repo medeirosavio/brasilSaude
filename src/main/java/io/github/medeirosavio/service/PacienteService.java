@@ -3,12 +3,8 @@ package io.github.medeirosavio.service;
 import io.github.medeirosavio.dto.EnderecoDTO;
 import io.github.medeirosavio.dto.PacienteDTO;
 import io.github.medeirosavio.exception.DataIntegrityViolationException;
-import io.github.medeirosavio.model.Endereco;
-import io.github.medeirosavio.model.Paciente;
-import io.github.medeirosavio.model.UPA;
-import io.github.medeirosavio.repository.EnderecoRepository;
-import io.github.medeirosavio.repository.PacienteRepository;
-import io.github.medeirosavio.repository.UPARepository;
+import io.github.medeirosavio.model.*;
+import io.github.medeirosavio.repository.*;
 import io.github.medeirosavio.util.CpfValidator;
 import io.github.medeirosavio.util.DatePastValidator;
 import io.github.medeirosavio.util.IdValidator;
@@ -24,10 +20,19 @@ public class PacienteService {
     private UPARepository upaRepository;
 
     @Autowired
+    private HospitalRepository hospitalRepository;
+
+    @Autowired
+    LaboratorioRepository laboratorioRepository;
+
+    @Autowired
     private PacienteRepository pacienteRepository;
 
     @Autowired
     private EnderecoRepository enderecoRepository;
+
+    @Autowired
+    private EntityValidationService entityValidationService;
 
     public void cadastrarPacienteUPA(PacienteDTO pacienteDTO,Long idUpa) {
         try {
@@ -40,9 +45,47 @@ public class PacienteService {
         }
     }
 
-    private Paciente converterDTOparaEntidade(PacienteDTO pacienteDTO,Long idUpa) {
+    public void cadastrarPacienteHospital(PacienteDTO pacienteDTO, Long idHospital) {
+        try {
+            Paciente paciente = converterDTOparaEntidade(pacienteDTO,idHospital);
+            pacienteRepository.save(paciente);
+        } catch (DataIntegrityViolationException e) {
+            throw new DataIntegrityViolationException("Erro de integridade de dados ao cadastrar o paciente", e);
+        } catch (Exception e) {
+            throw new RuntimeException("Erro interno ao processar a solicitação", e);
+        }
+
+    }
+
+    public void cadastrarPacienteLaboratorio(PacienteDTO pacienteDTO, Long idLaboratorio) {
+        try {
+            Paciente paciente = converterDTOparaEntidade(pacienteDTO,idLaboratorio);
+            pacienteRepository.save(paciente);
+        } catch (DataIntegrityViolationException e) {
+            throw new DataIntegrityViolationException("Erro de integridade de dados ao cadastrar o paciente", e);
+        } catch (Exception e) {
+            throw new RuntimeException("Erro interno ao processar a solicitação", e);
+        }
+    }
+
+    private Paciente converterDTOparaEntidade(PacienteDTO pacienteDTO,Long id) {
         Paciente paciente = new Paciente();
-        UPA upa = upaRepository.getById(idUpa);
+        Object entidadeAssociada = entityValidationService.validarEntidadePorId(id);
+        if (entidadeAssociada instanceof UPA) {
+            UPA upa = (UPA) entidadeAssociada;
+            paciente.setUpa(upa);
+            upa.getPacientes().add(paciente);
+        } else if (entidadeAssociada instanceof Hospital) {
+            Hospital hospital = (Hospital) entidadeAssociada;
+            paciente.setHospital(hospital);
+            hospital.getPacientes().add(paciente);
+        } else if (entidadeAssociada instanceof Laboratorio) {
+            Laboratorio laboratorio = (Laboratorio) entidadeAssociada;
+            paciente.setLaboratorio(laboratorio);
+            laboratorio.getPacientes().add(paciente);
+        } else {
+            throw new UnsupportedOperationException("Tipo de entidade associada não suportado");
+        }
         paciente.setCpf(pacienteDTO.getCpf());
         paciente.setNome(pacienteDTO.getNome());
         paciente.setDataNascimento(pacienteDTO.getDataNascimento());
@@ -51,12 +94,10 @@ public class PacienteService {
         paciente.setTelefone(pacienteDTO.getTelefone());
         paciente.setDataInicioSintomas(pacienteDTO.getDataInicioSintomas());
         paciente.setDataInternacao(pacienteDTO.getDataInternacao());
-        paciente.setUpa(upa);
         validarDataNoPassado(pacienteDTO.getDataInicioSintomas());
         validarDataNoPassado(pacienteDTO.getDataNascimento());
         validarCpf(pacienteDTO.getCpf());
-        validarId(idUpa);
-        upa.getPacientes().add(paciente);
+        validarId(id);
         try {
             Endereco endereco = converterEnderecoDTOparaEntidade(pacienteDTO.getEndereco());
             paciente.setEndereco(endereco);
@@ -99,6 +140,7 @@ public class PacienteService {
             throw new IllegalArgumentException("ID Inválido" + id);
         }
     }
+
 
 
 }

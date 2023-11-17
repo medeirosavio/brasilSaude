@@ -21,7 +21,13 @@ public class Paciente extends Pessoa{
     private Endereco endereco;
     @ManyToOne
     @JoinColumn(name = "id_upa")
-    UPA upa;
+    private UPA upa;
+    @ManyToOne
+    @JoinColumn(name = "id_hospital")
+    private Hospital hospital;
+    @ManyToOne
+    @JoinColumn(name = "id_laboratorio")
+    private Laboratorio laboratorio;
 
     public Paciente() {
         super();
@@ -74,5 +80,13 @@ public class Paciente extends Pessoa{
 
     public void setUpa(UPA upa) {
         this.upa = upa;
+    }
+
+    public void setHospital(Hospital hospital) {
+        this.hospital = hospital;
+    }
+
+    public void setLaboratorio(Laboratorio laboratorio) {
+        this.laboratorio = laboratorio;
     }
 }

@@ -18,7 +18,6 @@ public class UPA extends Empresa{
     @JoinColumn(name = "endereco_id")
     @JsonIgnore
     private Endereco endereco;
-
     @OneToMany(mappedBy = "upa")
     private List<Paciente> pacientes = new ArrayList<>();
 

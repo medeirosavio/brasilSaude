@@ -14,12 +14,12 @@ public class Hospital extends Empresa{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @OneToOne
     @JoinColumn(name = "endereco_id")
     @JsonIgnore
     private Endereco endereco;
-
+    @OneToMany(mappedBy = "hospital")
+    private List<Paciente> pacientes = new ArrayList<>();
     @OneToMany(mappedBy = "hospital")
     private List<RegistroOcupacao> registrosOcupacao = new ArrayList<>();
 
@@ -74,4 +74,7 @@ public class Hospital extends Empresa{
         this.endereco = endereco;
     }
 
+    public List<Paciente> getPacientes() {
+        return pacientes;
+    }
 }

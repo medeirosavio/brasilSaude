@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Laboratorio extends Empresa{
@@ -16,6 +18,9 @@ public class Laboratorio extends Empresa{
     @JoinColumn(name = "endereco_id")
     @JsonIgnore
     private Endereco endereco;
+
+    @OneToMany(mappedBy = "laboratorio")
+    private List<Paciente> pacientes = new ArrayList<>();
 
     public Laboratorio(){super();}
 
@@ -66,5 +71,9 @@ public class Laboratorio extends Empresa{
 
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
+    }
+
+    public List<Paciente> getPacientes() {
+        return pacientes;
     }
 }
