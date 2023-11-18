@@ -30,70 +30,32 @@ public class AdministradorController {
 
     @PostMapping("/cadastrar/hospital")
     public ResponseEntity<String> cadastrarHospital(@RequestBody HospitalDTO hospitalDTO) {
-        try {
-            hospitalService.cadastrarHospital(hospitalDTO);
-            return new ResponseEntity<>("Hospital cadastrado com sucesso", HttpStatus.CREATED);
-        } catch (NotFoundException e) {
-            return new ResponseEntity<>("Hospital não encontrado", HttpStatus.NOT_FOUND);
-        } catch (DataIntegrityViolationException e) {
-            return new ResponseEntity<>("Erro de integridade de dados ao cadastrar o hospital", HttpStatus.BAD_REQUEST);
-        } catch (Exception e) {
-            return new ResponseEntity<>("Erro interno ao processar a solicitação", HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        hospitalService.cadastrarHospital(hospitalDTO);
+        return new ResponseEntity<>("Hospital cadastrado com sucesso", HttpStatus.CREATED);
     }
 
     @PostMapping("/cadastrar/upa")
     public ResponseEntity<String> cadastrarUPA(@RequestBody UPADTO upadto) {
-        try {
-            upaService.cadastrarUPA(upadto);
-            return new ResponseEntity<>("UPA cadastrada com sucesso", HttpStatus.CREATED);
-        } catch (NotFoundException e) {
-            return new ResponseEntity<>("UPA não encontrada", HttpStatus.NOT_FOUND);
-        } catch (DataIntegrityViolationException e) {
-            return new ResponseEntity<>("Erro de integridade de dados ao cadastrar a UPA", HttpStatus.BAD_REQUEST);
-        } catch (Exception e) {
-            return new ResponseEntity<>("Erro interno ao processar a solicitação", HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        upaService.cadastrarUPA(upadto);
+        return new ResponseEntity<>("UPA cadastrada com sucesso", HttpStatus.CREATED);
     }
 
     @PostMapping("/cadastrar/laboratorio")
     public ResponseEntity<String> cadastrarLaboratorio(@RequestBody LaboratorioDTO laboratorioDTO) {
-        try {
-            laboratorioService.cadastrarLaboratorio(laboratorioDTO);
-            return new ResponseEntity<>("Laboratorio cadastrado com sucesso", HttpStatus.CREATED);
-        } catch (NotFoundException e) {
-            return new ResponseEntity<>("Laboratorio não encontrado", HttpStatus.NOT_FOUND);
-        } catch (DataIntegrityViolationException e) {
-            return new ResponseEntity<>("Erro de integridade de dados ao cadastrar o laboratorio", HttpStatus.BAD_REQUEST);
-        } catch (Exception e) {
-            return new ResponseEntity<>("Erro interno ao processar a solicitação", HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        laboratorioService.cadastrarLaboratorio(laboratorioDTO);
+        return new ResponseEntity<>("Laboratorio cadastrado com sucesso", HttpStatus.CREATED);
     }
 
     @PostMapping("/cadastrar/funcionario")
     public ResponseEntity<String> cadastrarFuncionario(@RequestBody FuncionarioDTO funcionarioDTO) {
-        try {
-            funcionarioService.cadastrarFuncionario(funcionarioDTO);
-            return new ResponseEntity<>("Funcionario cadastrado com sucesso", HttpStatus.CREATED);
-        } catch (NotFoundException e) {
-            return new ResponseEntity<>("Funcionario não encontrado", HttpStatus.NOT_FOUND);
-        } catch (DataIntegrityViolationException e) {
-            return new ResponseEntity<>("Erro de integridade de dados ao cadastrar o funcionario", HttpStatus.BAD_REQUEST);
-        } catch (Exception e) {
-            return new ResponseEntity<>("Erro interno ao processar a solicitação", HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        funcionarioService.cadastrarFuncionario(funcionarioDTO);
+        return new ResponseEntity<>("Funcionario cadastrado com sucesso", HttpStatus.CREATED);
     }
 
     @DeleteMapping("/funcionario/{id}")
     public ResponseEntity<String> removerFuncionario(@PathVariable Long id) {
-        try {
             funcionarioService.removerFuncionario(id);
             return ResponseEntity.ok("Funcionário removido com sucesso.");
-        } catch (NotFoundException e) {
-            return ResponseEntity.status(404).body("Funcionário não encontrado.");
-        } catch (Exception e) {
-            return ResponseEntity.status(500).body("Erro ao remover o funcionário.");
-        }
     }
 
 
