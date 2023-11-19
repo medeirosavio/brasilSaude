@@ -14,9 +14,7 @@ public class Hospital extends Empresa{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToOne
-    @JoinColumn(name = "endereco_id")
-    @JsonIgnore
+    @OneToOne(mappedBy = "hospital", cascade = CascadeType.ALL, orphanRemoval = true)
     private Endereco endereco;
     @OneToMany(mappedBy = "hospital")
     private List<Paciente> pacientes = new ArrayList<>();

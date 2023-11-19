@@ -9,15 +9,11 @@ import java.util.List;
 
 @Entity
 public class Paciente extends Pessoa{
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column
     private LocalDate dataInternacao;
+    @Column
     private LocalDate dataInicioSintomas;
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "endereco_id")
-    @JsonIgnore
+    @OneToOne(mappedBy = "paciente", cascade = CascadeType.ALL, orphanRemoval = true)
     private Endereco endereco;
     @ManyToOne
     @JoinColumn(name = "id_upa")

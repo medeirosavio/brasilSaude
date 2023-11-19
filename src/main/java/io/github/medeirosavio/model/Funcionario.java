@@ -8,14 +8,15 @@ import java.time.LocalTime;
 
 @Entity
 public class Funcionario extends Pessoa {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long matricula;
+    @Column
     private String cargo;
+    @Column
     private String departamento;
+    @Column
     private String status;
+    @Column
     private LocalDate dataAdmissao;
+    @Column
     private BigDecimal salario;
 
     @OneToOne(mappedBy = "funcionario", cascade = CascadeType.ALL, orphanRemoval = true)

@@ -14,9 +14,7 @@ public class UPA extends Empresa{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
-    @JoinColumn(name = "endereco_id")
-    @JsonIgnore
+    @OneToOne(mappedBy = "upa", cascade = CascadeType.ALL, orphanRemoval = true)
     private Endereco endereco;
     @OneToMany(mappedBy = "upa")
     private List<Paciente> pacientes = new ArrayList<>();
