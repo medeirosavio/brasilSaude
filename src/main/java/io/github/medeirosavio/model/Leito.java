@@ -1,10 +1,17 @@
 package io.github.medeirosavio.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Leito {
 
     @Id
@@ -16,10 +23,4 @@ public class Leito {
     @OneToMany(mappedBy = "leito")
     private List<RegistroOcupacao> registrosOcupacao = new ArrayList<>();
 
-    public Leito() {
-    }
-    public Leito(TipoLeito tipoLeito, StatusLeito statusLeito) {
-        this.tipoLeito = tipoLeito;
-        this.statusLeito = statusLeito;
-    }
 }

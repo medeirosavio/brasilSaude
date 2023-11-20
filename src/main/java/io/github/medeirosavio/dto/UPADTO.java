@@ -2,6 +2,9 @@ package io.github.medeirosavio.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.github.medeirosavio.model.Status;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -10,6 +13,9 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import java.time.LocalDate;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class UPADTO {
 
@@ -30,92 +36,6 @@ public class UPADTO {
     @NotNull
     @Enumerated(EnumType.STRING)
     private Status status;
-
     private EnderecoDTO endereco;
 
-    public UPADTO(){
-
-    }
-
-    public UPADTO(String cnpj, String nome, String telefone, String email,
-                       String site, LocalDate dataFundacao, String descricao,
-                       Status status, EnderecoDTO endereco){
-        this.cnpj = cnpj;
-        this.nome = nome;
-        this.telefone = telefone;
-        this.email = email;
-        this.site = site;
-        this.dataFundacao = dataFundacao;
-        this.descricao = descricao;
-        this.status = status;
-        this.endereco = endereco;
-    }
-
-    public String getCnpj() {
-        return cnpj;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getTelefone() {
-        return telefone;
-    }
-
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getSite() {
-        return site;
-    }
-
-    public void setSite(String site) {
-        this.site = site;
-    }
-
-    public LocalDate getDataFundacao() {
-        return dataFundacao;
-    }
-
-    public void setDataFundacao(LocalDate dataFundacao) {
-        this.dataFundacao = dataFundacao;
-    }
-
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-
-    public Status getStatus() {
-        return status;
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
-    }
-
-    public EnderecoDTO getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(EnderecoDTO endereco) {
-        this.endereco = endereco;
-    }
 }
